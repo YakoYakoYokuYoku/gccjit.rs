@@ -183,6 +183,28 @@ impl<'ctx> Context<'ctx> {
         }
     }
 
+    /// Sets the CPU that the JIT compiler will target to (AVR only).
+    pub fn set_mode_cpu<S: AsRef<str>>(&self, name: S) {
+        let name_ref = name.as_ref();
+        let c_str = CString::new(name_ref).unwrap();
+        unsafe {
+            gccjit_sys::gcc_jit_context_set_str_option(self.ptr,
+                                                       GCC_JIT_STR_OPTION_MODE_CPU,
+                                                       c_str.as_ptr());
+        }
+    }
+
+    /// Sets the MCU that the JIT compiler will target to (AVR only).
+    pub fn set_mode_mcu<S: AsRef<str>>(&self, name: S) {
+        let name_ref = name.as_ref();
+        let c_str = CString::new(name_ref).unwrap();
+        unsafe {
+            gccjit_sys::gcc_jit_context_set_str_option(self.ptr,
+                                                       GCC_JIT_STR_OPTION_MODE_MCU,
+                                                       c_str.as_ptr());
+        }
+    }
+
     /// Sets the optimization level that the JIT compiler will use.
     /// The higher the optimization level, the longer compilation will
     /// take.

@@ -35,6 +35,8 @@ pub enum gcc_jit_tls_model {
 #[repr(C)]
 pub enum gcc_jit_str_option {
     GCC_JIT_STR_OPTION_PROGNAME,
+    GCC_JIT_STR_OPTION_MODE_CPU,
+    GCC_JIT_STR_OPTION_MODE_MCU,
     GCC_JIT_NUM_STR_OPTIONS
 }
 
